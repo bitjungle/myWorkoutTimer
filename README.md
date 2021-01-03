@@ -3,7 +3,9 @@
 
 myWorkoutTimer is a truly free workout timer app. No ads, no trackers and no subscriptions necessary. It
 was made to suit my personal needs and workout regime. It is very easy to use, with minimal configuration
-needed. [Start the app here](http://www.bitjungle.com/myWorkoutTimer/), hit a button and start working out.
+needed. 
+
+### [Start the app here](http://www.bitjungle.com/myWorkoutTimer/)
 
 If you want to install the app on your phone, follow the [instructions here for android and ios](https://mobilesyrup.com/2020/05/24/how-install-progressive-web-app-pwa-android-ios-pc-mac/).
 
