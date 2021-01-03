@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="BITJUNGLE Rune Mathisen">
+    <meta name="description" content="A free and flexible workout timer">
+    <meta name="license" content="GPLv3">
+    <meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-title" content="myWorkoutTimer" />
+    <meta name="application-name" content="myWorkoutTimer" />
+    <meta name="theme-color" content="#5c1e19" />
+	<meta name="msapplication-TileColor" content="#5c1e19" />
+	<meta name="msapplication-TileImage" content="./img/favicon_white_xxlarge.png" />
+    <title>myWorkoutTimer</title>
+    <script src="./js/workout.js" defer></script>
+    <script src="./js/common.js" defer></script>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./img/favicon_black.png" type="image/x-icon">
+    <link rel="icon" type="image/png" href="./img/favicon_white.png" sizes="36x36" />
+	<link rel="icon" type="image/png" href="./img/favicon_white_large.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="./img/favicon_white_xxlarge.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/color-theme.css">
+</head>
+
+<body class="w3-theme-d5">
+
+    <header>
+        <div class="w3-light-grey">
+            <div id="progressbar" class="w3-container w3-blue w3-center w3-xlarge">&nbsp;</div>
+        </div>
+    </header>
+
+    <main class="w3-container w3-animate-opacity">
+        <div class="w3-row">
+            <div id="workbox" class="w3-col s6 w3-grey w3-center">
+                <h2 id="worktxt">WORKOUT</h2>
+            </div>
+            <div id="timerbox" class="w3-col s6 w3-dark-grey w3-center">
+                <h2 id="timertxt" class="w3-monospace">00:00:00</h2>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s8 w3-center">
+                <h3 id="feedbacktxt" class="w3-container">Press play to start.</h3>
+            </div>
+            <div class="w3-col s4 w3-center">
+                <button id="startstop" class="w3-button w3-circle w3-large w3-monospace w3-green">&#9658;</button>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-third">&nbsp;</div>
+            <div id="inputarea" class="w3-container w3-center w3-third">
+                <div id="input_reps" class="w3-hide">
+                    <label for="input_reps_val" class="w3-large">Number of reps: </label>
+                    <input id="input_reps_val" name="input_reps_val" class="w3-input" type="number" min="1">
+                </div>
+                <div id="input_amrap" class="w3-hide">
+                    <label for="input_amrap_mins">Minutes: </label>
+                    <input id="input_amrap_mins" name="input_amrap_mins" class="w3-input" type="number" min="1">
+                </div>
+                <div id="input_time_cap" class="w3-hide">
+                    <label for="input_time_cap_mins" class="w3-label w3-large">Time cap (mins): </label>
+                    <input id="input_time_cap_mins" name="input_time_cap_mins" class="w3-input" type="number" min="1">
+                </div>
+            </div>
+            <div class="w3-third">&nbsp;</div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        <h1 style="text-align: center; margin: 0%;">myWorkoutTimer<img src="img/favicon_white.png" alt="logo"></h1>
+        <p id="backlink" class="w3-center"><button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+            onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button></p>
+        <p id="copyright" class="w3-center w3-tiny">&copy; BITJUNGLE Rune Mathisen 
+            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GPLv3</a></p>
+        </footer>
+
+    <audio id="woodending" src="snd/woodending.mp3"></audio>
+    <audio id="ding" src="snd/ding.mp3"></audio>
+    <audio id="dingding" src="snd/dingding.mp3"></audio>
+    <audio id="dingdingding" src="snd/dingdingding.mp3"></audio>
+    <audio id="ticktock" src="snd/ticktock.mp3"></audio>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("./sw.js").then((reg) => {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "myWorkoutTimer",
+  "short_name": "timer",
+  "scope": "/myWorkoutTimer/",
+  "start_url": "/myWorkoutTimer/index.html",
+  "display": "fullscreen",
+  "background_color": "#5c1e19",
+  "theme_color": "#5c1e19",
+  "description": "A free and flexible workout timer",
+	"author": {
+		"name": "Rune Mathisen",
+		"website": "https://www.bitjungle.com",
+		"github": "https://github.com/bitjungle",
+		"source-repo": "https://github.com/bitjungle/myWorkoutTimer"
+	},
+  "icons": [{
+    "src": "./img/favicon_white.png",
+    "sizes": "36x36",
+    "type": "image/png"
+  }, {
+    "src": "./img/favicon_white_large.png",
+    "sizes": "96x96",
+    "type": "image/png"
+  }, {
+      "src": "./img/favicon_white_xlarge.png",
+      "sizes": "144x144",
+      "type": "image/png"
+  }, {
+      "src": "./img/favicon_white_xxlarge.png",
+      "purpose": "maskable any",
+      "sizes": "180x180",
+      "type": "image/png"
+  }, {
+        "src": "./img/favicon_white_xxxlarge.png",
+        "purpose": "maskable any",
+        "sizes": "512x512",
+        "type": "image/png"
+  }, {
+    "src": "./img/fitness_center-white-24dp.svg",
+    "purpose": "maskable any",
+    "sizes": "24x24",
+    "type": "image/svg"
+  }]
+}

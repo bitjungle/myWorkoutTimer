@@ -1,0 +1,23 @@
+/**
+ * myWorkoutTimer
+ *
+ * Copyright (C) 2020 BITJUNGLE Rune Mathisen
+ * This code is licensed under a GPLv3 license 
+ * See http://www.gnu.org/licenses/gpl-3.0.html 
+ */
+ 
+body {
+    font-family: Verdana, sans-serif;
+}
+
+main {
+    margin-top: 1rem;
+}
+
+dd {
+    padding: 0.5em;
+}
+
+#startstop {
+    margin-top: 1rem;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="BITJUNGLE Rune Mathisen">
+    <meta name="description" content="A free and flexible workout timer">
+    <meta name="license" content="GPLv3">
+    <meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-title" content="myWorkoutTimer" />
+    <meta name="application-name" content="myWorkoutTimer" />
+    <meta name="theme-color" content="#5c1e19" />
+	<meta name="msapplication-TileColor" content="#5c1e19" />
+	<meta name="msapplication-TileImage" content="./img/favicon_white_xxlarge.png" />
+    <title>About myWorkoutTimer</title>
+    <script src="./js/about.js" defer></script>
+    <script src="./js/common.js" defer></script>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./img/favicon_black.png" type="image/x-icon">
+    <link rel="icon" type="image/png" href="./img/favicon_white.png" sizes="36x36" />
+	<link rel="icon" type="image/png" href="./img/favicon_white_large.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="./img/favicon_white_xxlarge.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/color-theme.css">
+</head>
+
+<body class="w3-theme-d5">
+    <header>
+        <h1 class="w3-center">About myWorkoutTimer<img src="img/favicon_white.png" alt="logo"></h1>
+    </header>
+    <main class="w3-container">
+        <div id="about" class="w3-container">
+            <p><strong>myWorkoutTimer</strong> is a truly free workout timer app. No ads, no trackers and no
+                subscriptions necessary. It was made to suit my personal needs and workout regime. It is very easy to
+                use, with minimal configuration needed. Just hit a button and start working out. The following workout
+                types are supported:</p>
+        </div>
+        <dl>
+            <dt id="emom_dt">EMOM</dt>
+            <dd id="emom">
+                <p><strong>Every minute on the minute</strong> workouts are a type of high-intensity interval training
+                    (HIIT), where you alternate short bursts of intense exercise with low-intensity recovery periods.
+                    You have 1 minute to complete a specific number of reps of a particular exercise. When you’ve
+                    completed your set of reps, you use the remainder of that minute to rest before you move
+                    on to your next set of reps. You repeat this cycle for the duration of your workout.</p>
+
+                <p id="emom_nav" class="w3-center w3-hide">
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                    onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button>
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l3 w3-monospace"
+                    onclick="window.location.href='./workout.html?type=emom';">&nbsp;&nbsp;go&nbsp;to&nbsp;timer&nbsp;&rightarrow;</button>
+                </p>
+            </dd>
+            <dt id="amrap_dt">AMRAP</dt>
+            <dd id="amrap">
+                <p><strong>As many reps as possible</strong> workouts involve doing as many reps or rounds (of a
+                    pre-established circuit) as possible. You’re given a set time to try and complete as much work as
+                    you can within. To do an AMRAP, select a series of exercises and a prescribed amount of time in
+                    which to complete as many rounds or reps of the designated moves as you can within a given
+                    timeframe.</p>
+
+                <p id="amrap_nav" class="w3-center w3-hide">
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                    onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button>
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l3 w3-monospace"
+                    onclick="window.location.href='./workout.html?type=amrap';">&nbsp;&nbsp;go&nbsp;to&nbsp;timer&nbsp;&rightarrow;</button>
+                </p>
+                </dd>
+            <dt id="time_dt">TIME</dt>
+            <dd id="time">
+                <p><strong>For time</strong> workouts are a type of training where the goal is to complete the
+                    prescribed amount of work as fast as possible.</p>
+
+                <p id="time_nav" class="w3-center w3-hide">
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                    onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button>
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l3 w3-monospace"
+                    onclick="window.location.href='./workout.html?type=time';">&nbsp;&nbsp;go&nbsp;to&nbsp;timer&nbsp;&rightarrow;</button>
+                </p>
+                </dd>
+            <dt id="tabata_dt">TABATA</dt>
+            <dd id="tabata">
+                <p><strong>Tabata</strong> workouts lasts four minutes. The structure of the program is to work out hard
+                    for 20 seconds, rest for 10 seconds and complete eight rounds.</p>
+
+                <p id="tabata_nav" class="w3-center w3-hide">
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                    onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button>
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l3 w3-monospace"
+                    onclick="window.location.href='./workout.html?type=tabata';">&nbsp;&nbsp;go&nbsp;to&nbsp;timer&nbsp;&rightarrow;</button>
+                </p>
+                </dd>
+            <dt id="hiit_dt">HIIT</dt>
+            <dd id="hiit">
+                <p><strong>High-intensity interval training</strong> is a form of interval training, a cardiovascular
+                    exercise strategy alternating short periods of intense anaerobic exercise with less intense recovery
+                    periods.</p>
+
+                <p>This particular HIIT 4x4 variation is divided into a 4-minute warm-up period followed by four
+                    high-intensity intervals. Each interval consists of a 4-minute period of extreme exertion, at about
+                    90 percent of maximum heart rate, followed by a 4-minute period at about 60 percent of heart
+                    rate. The session then concludes with a 4-minute cooldown period.</p>
+
+                <p id="hiit_nav" class="w3-center w3-hide">
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                    onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button>
+                    <button class="w3-button w3-ripple w3-padding-large w3-theme-l3 w3-monospace"
+                    onclick="window.location.href='./workout.html?type=hiit';">&nbsp;&nbsp;go&nbsp;to&nbsp;timer&nbsp;&rightarrow;</button>                
+                </p>
+                </dd>
+        </dl>
+    </main>
+    <footer>
+        <p id="backlink" class="w3-center"><button class="w3-button w3-ripple w3-padding-large w3-theme-l2 w3-monospace"
+                onclick="window.location.href='./index.html';">&leftarrow;&nbsp;back&nbsp;to&nbsp;index</button></p>
+        <p id="copyright" class="w3-center w3-tiny">&copy; BITJUNGLE Rune Mathisen 
+            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GPLv3</a></p>
+    </footer>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("./sw.js").then(f(reg) => {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
+</body>
+</html>

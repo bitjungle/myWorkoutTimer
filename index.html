@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="BITJUNGLE Rune Mathisen">
+    <meta name="description" content="A free and flexible workout timer">
+    <meta name="license" content="GPLv3">
+    <meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-title" content="myWorkoutTimer" />
+    <meta name="application-name" content="myWorkoutTimer" />
+    <meta name="theme-color" content="#5c1e19" />
+	<meta name="msapplication-TileColor" content="#5c1e19" />
+	<meta name="msapplication-TileImage" content="./img/favicon_white_xxlarge.png" />
+    <title>myWorkoutTimer</title>
+    <script src="./js/common.js" defer></script>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./img/favicon_black.png" type="image/x-icon">
+    <link rel="icon" type="image/png" href="./img/favicon_white.png" sizes="36x36" />
+	<link rel="icon" type="image/png" href="./img/favicon_white_large.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="./img/favicon_white_xxlarge.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/color-theme.css">
+</head>
+
+<body class="w3-theme-d5">
+    <header>
+        <h1 class="w3-center">myWorkoutTimer<img src="img/favicon_white.png" alt="logo"></h1>
+    </header>
+    <main class="w3-container">
+        <p style="text-align: center;">Select workout type:</p>
+        <div class="w3-row">
+            <div class="w3-col s10 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-theme-l5"
+                    onclick="window.location.href='./workout.html?type=emom';">EMOM</button>
+            </div>
+            <div class="w3-col s2 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-white"
+                    onclick="window.location.href='./about.html?type=emom#emom_dt';">?</button>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s10 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-theme-l4"
+                    onclick="window.location.href='./workout.html?type=amrap';">AMRAP</button>
+            </div>
+            <div class="w3-col s2 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-light-gray"
+                    onclick="window.location.href='./about.html?type=amrap#amrap_dt';">?</button>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s10 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-theme-l3"
+                    onclick="window.location.href='./workout.html?type=time';">TIME</button>
+            </div>
+            <div class="w3-col s2 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-gray"
+                    onclick="window.location.href='./about.html?type=time#time_dt';">?</button>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s10 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-theme-l2"
+                    onclick="window.location.href='./workout.html?type=tabata';">TABATA</button>
+            </div>
+            <div class="w3-col s2 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-dark-gray"
+                    onclick="window.location.href='./about.html?type=tabata#tabata_dt';">?</button>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s10 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-theme-l1"
+                    onclick="window.location.href='./workout.html?type=hiit';">HIIT</button>
+            </div>
+            <div class="w3-col s2 w3-center">
+                <button class="w3-button w3-block w3-ripple w3-padding-large w3-black"
+                    onclick="window.location.href='./about.html?type=hiit#hiit_dt';">?</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p id="copyright" class="w3-center w3-tiny">&copy; BITJUNGLE Rune Mathisen 
+            <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GPLv3</a></p>
+    </footer>
+    <script>
+        if (!navigator.serviceWorker.controller) {
+            navigator.serviceWorker.register("./sw.js").then((reg) => {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+            });
+        }
+    </script>
+</body>
+</html>
