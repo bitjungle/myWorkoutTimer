@@ -34,7 +34,6 @@ const TIMERINTERVAL = 1000; // milliseconds
 
 // Global variables
 let timerStarted = false; // workout start time
-let rep = 0; // rep counter
 let timerSettings = {
     warmup: null,
     work: null,
@@ -43,7 +42,10 @@ let timerSettings = {
     cooldown: null,
     cap: null
 };
-let timerFunction = null;
+let timer = {
+    function: null,
+    rep: 0 // rep counter
+};
 
 // Get the selected workout type, default is 'time'.
 let params = (new URL(document.location)).searchParams;
@@ -56,7 +58,7 @@ let workoutType = params.get("type") === null ? 'time' : params.get("type");
  * 
  * @param {Object} e - event data
  */
-const toggleStartStopButton = (e) => {
+function toggleStartStopButton(e) {
     console.log(e);
     if (timerStarted) {
         timerStarted = false;
@@ -65,11 +67,11 @@ const toggleStartStopButton = (e) => {
         updateStartStopButtonFace(timerStarted);
     } else {
         timerStarted = true;
-        rep = 0;
+        timer.rep = 0;
         getUserInput();
         updateFeedbackText("Starting...");
         updateStartStopButtonFace(timerStarted);
-        timerID = setInterval(timerFunction, TIMERINTERVAL, Date.now());
+        timerID = setInterval(timer.function, TIMERINTERVAL, Date.now());
         WOODENDING.play();
     }
 };
@@ -79,7 +81,7 @@ const toggleStartStopButton = (e) => {
  * 
  * @param {number} startTime - the workout start time
  */
-const timerTime = (startTime) => {
+function timerTime(startTime) {
     // Calculate elapsed time in seconds since start
     let delta = Math.floor((Date.now() - startTime) / 1000);
     if (delta > (timerSettings.cap + timerSettings.warmup)) {
@@ -117,7 +119,7 @@ const timerTime = (startTime) => {
  * 
  * @param {number} startTime - the workout start time
  */
-const timerAmrap = (startTime) => {
+function timerAmrap(startTime) {
     // Calculate remaining time in seconds
     let delta = timerSettings.work - Math.floor((Date.now() - startTime) / 1000) + timerSettings.warmup;
 
@@ -151,6 +153,8 @@ const timerAmrap = (startTime) => {
                 updateFeedbackText("Less than 60 secs left!");
                 TICKTOCK.play();
             }
+        } else {
+            updateFeedbackText('Work!');
         }
     }
 };
@@ -160,12 +164,12 @@ const timerAmrap = (startTime) => {
  * 
  * @param {number} startTime - the workout start time
  */
-const timerEmom = (startTime) => {
+function timerEmom(startTime) {
     // Calculate elapsed time in seconds since start
     let delta = Math.floor((Date.now() - startTime) / 1000) - timerSettings.warmup;
     updateProgressbar(Math.round(100 * delta / (timerSettings.cap - timerSettings.warmup)));
-    if (delta >= timerSettings.work * rep) { // new rep or finish
-        if (rep == timerSettings.reps) {
+    if (delta >= timerSettings.work * timer.rep) { // new rep or finish
+        if (timer.rep == timerSettings.reps) {
             toggleStartStopButton();
             TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow');
             TIMERBOX.classList.add('w3-red');
@@ -176,14 +180,14 @@ const timerEmom = (startTime) => {
             TIMERBOX.classList.add('w3-yellow');
             updateFeedbackText("Get ready!");
         } else {
-            rep++;
-            updateFeedbackText('Rep ' + rep + '/' + timerSettings.reps);
+            timer.rep++;
+            updateFeedbackText('Rep ' + timer.rep + '/' + timerSettings.reps);
             TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow');
             TIMERBOX.classList.add('w3-green');
             DING.play();
         }
     }
-    let remainingInRep = (timerSettings.work * rep) - delta;
+    let remainingInRep = (timerSettings.work * timer.rep) - delta;
     updateTimerText(remainingInRep);
     if (delta < 0) {
         updateFeedbackText("Workout starting soon...");
@@ -191,7 +195,7 @@ const timerEmom = (startTime) => {
     if (remainingInRep < 6) {
         TIMERBOX.classList.remove('w3-green', 'w3-dark-grey');
         TIMERBOX.classList.add('w3-yellow');
-        if (rep < timerSettings.reps) updateFeedbackText("Get ready!");
+        if (timer.rep < timerSettings.reps) updateFeedbackText("Get ready!");
         TICKTOCK.play();
     }
 };
@@ -201,13 +205,13 @@ const timerEmom = (startTime) => {
  * 
  * @param {number} startTime - the workout start time
  */
-const timerHiit = (startTime) => {
+function timerHiit(startTime) {
     // Calculate elapsed time in seconds since start
     let delta = Math.floor((Date.now() - startTime) / 1000);
     updateProgressbar(Math.round(100 * delta / timerSettings.cap));
     if (delta >= (timerSettings.warmup + (timerSettings.work + timerSettings.rest) * rep)) {
         // We have just finished a work+rest period, figure out what to do next
-        if (rep == timerSettings.reps) {
+        if (timer.rep == timerSettings.reps) {
             // We have completed all the reps
             if (timerSettings.cooldown != 0 && delta < timerSettings.cap) {
                 // There is a cooldown period set for this workout
@@ -227,8 +231,8 @@ const timerHiit = (startTime) => {
             }
         } else {
             // We are starting a new rep
-            rep++;
-            updateFeedbackText('WORK! Round: ' + rep + '/' + timerSettings.reps);
+            timer.rep++;
+            updateFeedbackText('WORK! Round: ' + timer.rep + '/' + timerSettings.reps);
             TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-yellow');
             TIMERBOX.classList.add('w3-green');
             DING.play();
@@ -249,7 +253,7 @@ const timerHiit = (startTime) => {
     }
 
     let remainingInRep = timerSettings.warmup + ((timerSettings.work + timerSettings.rest) * rep) - delta;
-    console.log('rep: ', rep, ' delta: ', delta, ' remaining: ', remainingInRep);
+    console.log('rep: ', timer.rep, ' delta: ', delta, ' remaining: ', remainingInRep);
     if (remainingInRep <= timerSettings.rest) {
         if (remainingInRep == timerSettings.rest && remainingInRep > 0) {
             // Work completed, entering a rest period
@@ -257,7 +261,7 @@ const timerHiit = (startTime) => {
             TIMERBOX.classList.add('w3-red');
             updateFeedbackText("Rest... " + rep + " rounds completed");
             DINGDING.play();
-        } else if (remainingInRep < 6 && remainingInRep > 0 && rep < timerSettings.reps) {
+        } else if (remainingInRep < 6 && remainingInRep > 0 && timer.rep < timerSettings.reps) {
             // Starting a new rep in 5 seconds
             if (remainingInRep == 5) {
                 TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-green');
@@ -284,7 +288,7 @@ const timerHiit = (startTime) => {
  * 
  * @param {number} secs - seconds to convert
  */
-const secsToHMS = (secs) => {
+function secsToHMS(secs) {
     let measuredTime = new Date(null);
     measuredTime.setSeconds(secs);
     return measuredTime.toISOString().substr(11, 8);
@@ -295,7 +299,7 @@ const secsToHMS = (secs) => {
  * 
  * @param {number} progress - progress in percent
  */
-const updateProgressbar = (progress) => {
+function updateProgressbar(progress) {
     if (progress < 0) progress = 0;
     let pStr = String(progress + '%');
     PROGRESSBAR.style.width = PROGRESSBAR.innerHTML = pStr;
@@ -306,7 +310,7 @@ const updateProgressbar = (progress) => {
  * 
  * @param {number} timerValue - Value in seconds
  */
-const updateTimerText = (timerValue) => {
+function updateTimerText(timerValue) {
     TIMERTXT.innerHTML = secsToHMS(timerValue);
 };
 
@@ -315,7 +319,7 @@ const updateTimerText = (timerValue) => {
  * 
  * @param {string} txt - String to display
  */
-const updateFeedbackText = (txt) => {
+function updateFeedbackText(txt) {
     console.log(txt);
     FEEDBACKTXT.innerHTML = txt;
 };
@@ -325,7 +329,7 @@ const updateFeedbackText = (txt) => {
  * 
  * @param {string} txt 
  */
-const updateWorkoutText = (txt) => {
+function updateWorkoutText(txt) {
     console.log(txt);
     WORKTXT.innerHTML = txt.toUpperCase();
 };
@@ -335,7 +339,7 @@ const updateWorkoutText = (txt) => {
  * 
  * @param {bool} playing 
  */
-const updateStartStopButtonFace = (playing) => {
+function updateStartStopButtonFace(playing) {
     if (playing) {
         STARTSTOPBUTTON.innerHTML = '&#9632;'; //BLACK SQUARE
         STARTSTOPBUTTON.classList.remove('w3-green');
@@ -351,7 +355,7 @@ const updateStartStopButtonFace = (playing) => {
  * Get the user inputs for workout customisation and hide the input area.
  * 
  */
-const getUserInput = () => {
+function getUserInput() {
     switch (workoutType) {
         case 'emom':
             timerSettings.reps = IN_REPS_VAL.value;
@@ -379,13 +383,11 @@ const getUserInput = () => {
 /**
  * 
  */
-const calcCap = () => {
+function calcCap() {
     return timerSettings.warmup + (timerSettings.work + timerSettings.rest) * timerSettings.reps + timerSettings.cooldown;
 }
 
 // ================================== MAIN =============================
-
-updateWorkoutText(workoutType);
 
 /**
  * Set up default settings for the user selected workout type.
@@ -399,7 +401,7 @@ switch (workoutType) {
         timerSettings.cooldown = 0;
         timerSettings.cap = calcCap();
         console.log(timerSettings.cap);
-        timerFunction = timerEmom;
+        timer.function = timerEmom;
         IN_REPS_VAL.value = timerSettings.reps;
         IN_REPS.classList.remove('w3-hide');
         break;
@@ -410,7 +412,7 @@ switch (workoutType) {
         timerSettings.reps = 0;
         timerSettings.cooldown = 0;
         timerSettings.cap = calcCap(); // timerSettings.work;
-        timerFunction = timerAmrap;
+        timer.function = timerAmrap;
         IN_AMRAP_MINS.value = timerSettings.work / 60;
         IN_AMRAP.classList.remove('w3-hide');
         break;
@@ -421,7 +423,7 @@ switch (workoutType) {
         timerSettings.reps = 0;
         timerSettings.cap = 20 * 60; // Default is 20 mins
         timerSettings.cooldown = 0;
-        timerFunction = timerTime;
+        timer.function = timerTime;
         IN_TIME_CAP_MINS.value = timerSettings.cap / 60;
         IN_TIME_CAP.classList.remove('w3-hide');
         break;
@@ -432,7 +434,7 @@ switch (workoutType) {
         timerSettings.reps = 8;  // Standard tabata: 8 reps
         timerSettings.cooldown = 0;
         timerSettings.cap = calcCap(); // (timerSettings.work + timerSettings.rest) * timerSettings.reps;
-        timerFunction = timerHiit;
+        timer.function = timerHiit;
         break;
     case 'hiit':
         timerSettings.warmup = 4 * 60;
@@ -441,7 +443,7 @@ switch (workoutType) {
         timerSettings.reps = 4;
         timerSettings.cooldown = 4 * 60;
         timerSettings.cap = calcCap();
-        timerFunction = timerHiit;
+        timer.function = timerHiit;
         break;
     default:
         timerSettings.warmup = 0;
@@ -455,5 +457,6 @@ switch (workoutType) {
 }
 
 STARTSTOPBUTTON.addEventListener("click", toggleStartStopButton);
+updateWorkoutText(workoutType);
 updateProgressbar(0);
 updateTimerText(0);
