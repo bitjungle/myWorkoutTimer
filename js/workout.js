@@ -86,7 +86,7 @@ function timerTime(startTime) {
     timer.secs = timeElapsed(startTime);
     if (timer.secs > (timerSettings.cap + timerSettings.warmup)) {
         toggleStartStopButton();
-        TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-green');
+        TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-light-green');
         TIMERBOX.classList.add('w3-red');
         updateFeedbackText("Finished!");
         DINGDINGDING.play();
@@ -105,7 +105,7 @@ function timerTime(startTime) {
     } else {
         if (timer.secs == timerSettings.warmup) {
             TIMERBOX.classList.remove('w3-yellow');
-            TIMERBOX.classList.add('w3-green');
+            TIMERBOX.classList.add('w3-light-green');
             updateFeedbackText('Work! Time cap is ' + timerSettings.cap / 60 + ' minutes.');
             DING.play();
         }
@@ -138,18 +138,18 @@ function timerAmrap(startTime) {
         updateTimerText(remaining);
         if (remaining == timerSettings.work) {
             TIMERBOX.classList.remove('w3-yellow');
-            TIMERBOX.classList.add('w3-green');
+            TIMERBOX.classList.add('w3-light-green');
             DING.play();
         }
         if (remaining < 60) {
             if (remaining <= 0) {
                 toggleStartStopButton();
-                TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-green');
+                TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-light-green');
                 TIMERBOX.classList.add('w3-red');
                 updateFeedbackText("Finished!");
                 DINGDINGDING.play();
             } else {
-                TIMERBOX.classList.remove('w3-dark-grey', 'w3-green');
+                TIMERBOX.classList.remove('w3-dark-grey', 'w3-light-green');
                 TIMERBOX.classList.add('w3-yellow');
                 updateFeedbackText("Less than 60 secs left!");
                 TICKTOCK.play();
@@ -177,14 +177,14 @@ function timerEmom(startTime) {
             updateFeedbackText("Finished!");
             DINGDINGDING.play();
         } else if (timer.secs < 0) {
-            TIMERBOX.classList.remove('w3-dark-grey', 'w3-green');
+            TIMERBOX.classList.remove('w3-dark-grey', 'w3-light-green');
             TIMERBOX.classList.add('w3-yellow');
             updateFeedbackText("Get ready!");
         } else {
             timer.rep++;
             updateFeedbackText('Rep ' + timer.rep + '/' + timerSettings.reps);
             TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow');
-            TIMERBOX.classList.add('w3-green');
+            TIMERBOX.classList.add('w3-light-green');
             DING.play();
         }
     }
@@ -194,7 +194,7 @@ function timerEmom(startTime) {
         updateFeedbackText("Workout starting soon...");
     }
     if (remainingInRep < 6) {
-        TIMERBOX.classList.remove('w3-green', 'w3-dark-grey');
+        TIMERBOX.classList.remove('w3-light-green', 'w3-dark-grey');
         TIMERBOX.classList.add('w3-yellow');
         if (timer.rep < timerSettings.reps) updateFeedbackText("Get ready!");
         TICKTOCK.play();
@@ -218,14 +218,14 @@ function timerHiit(startTime) {
                 // There is a cooldown period set for this workout
                 if (timer.secs == (timerSettings.cap - timerSettings.cooldown)) {
                     updateFeedbackText("Cooldown");
-                    TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-green');
+                    TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-light-green');
                     TIMERBOX.classList.add('w3-yellow');
                     DINGDING.play();
                 }
             } else {
                 // We are done, wrap it up
                 toggleStartStopButton();
-                TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-green');
+                TIMERBOX.classList.remove('w3-dark-grey', 'w3-yellow', 'w3-light-green');
                 TIMERBOX.classList.add('w3-red');
                 updateFeedbackText("Finished!");
                 DINGDINGDING.play();
@@ -235,7 +235,7 @@ function timerHiit(startTime) {
             timer.rep++;
             updateFeedbackText('WORK! Round: ' + timer.rep + '/' + timerSettings.reps);
             TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-yellow');
-            TIMERBOX.classList.add('w3-green');
+            TIMERBOX.classList.add('w3-light-green');
             DING.play();
         }
     } else if (timerSettings.warmup != 0 && timer.secs < timerSettings.warmup) {
@@ -245,7 +245,7 @@ function timerHiit(startTime) {
                 updateFeedbackText("Workout starting soon...");
             } else {
                 updateFeedbackText("Warmup");
-                TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-green');
+                TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-light-green');
                 TIMERBOX.classList.add('w3-yellow');
             }
         }
@@ -258,14 +258,14 @@ function timerHiit(startTime) {
     if (remainingInRep <= timerSettings.rest) {
         if (remainingInRep == timerSettings.rest && remainingInRep > 0) {
             // Work completed, entering a rest period
-            TIMERBOX.classList.remove('w3-yellow', 'w3-dark-grey', 'w3-green');
+            TIMERBOX.classList.remove('w3-yellow', 'w3-dark-grey', 'w3-light-green');
             TIMERBOX.classList.add('w3-red');
             updateFeedbackText("Rest... " + timer.rep + " rounds completed");
             DINGDING.play();
         } else if (remainingInRep < 6 && remainingInRep > 0 && timer.rep < timerSettings.reps) {
             // Starting a new rep in 5 seconds
             if (remainingInRep == 5) {
-                TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-green');
+                TIMERBOX.classList.remove('w3-red', 'w3-dark-grey', 'w3-light-green');
                 TIMERBOX.classList.add('w3-yellow');
                 updateFeedbackText("Get ready!");
                 TICKTOCK.play();
@@ -352,12 +352,12 @@ function updateWorkoutText(txt) {
 function updateStartStopButtonFace(playing) {
     if (playing) {
         STARTSTOPBUTTON.innerHTML = '&#9632;'; //BLACK SQUARE
-        STARTSTOPBUTTON.classList.remove('w3-green');
+        STARTSTOPBUTTON.classList.remove('w3-light-green');
         STARTSTOPBUTTON.classList.add('w3-red');
     } else {
         STARTSTOPBUTTON.innerHTML = '&#9658;'; //BLACK RIGHT-POINTING POINTER
         STARTSTOPBUTTON.classList.remove('w3-red');
-        STARTSTOPBUTTON.classList.add('w3-green');
+        STARTSTOPBUTTON.classList.add('w3-light-green');
     }
 };
 
