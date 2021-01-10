@@ -88,12 +88,5 @@
         <p id="copyright" class="w3-center w3-tiny">&copy; BITJUNGLE Rune Mathisen 
             <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU GPLv3</a></p>
     </footer>
-    <script>
-        if (!navigator.serviceWorker.controller) {
-            navigator.serviceWorker.register("./sw.js").then((reg) => {
-                console.log("Service worker has been registered for scope: " + reg.scope);
-            });
-        }
-    </script>
 </body>
 </html>

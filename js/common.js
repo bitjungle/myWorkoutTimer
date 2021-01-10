@@ -6,4 +6,10 @@
  * See http://www.gnu.org/licenses/gpl-3.0.html 
  */
 
-'esversion: 6'
+if (!navigator.serviceWorker.controller) {
+    navigator.serviceWorker.register("./sw.js").then((registration) => {
+        console.log("Service worker has been registered for scope: " + registration.scope);
+    }).catch(error => {
+        console.log("Service worker feiled! " + error);
+    });
+}

@@ -87,12 +87,5 @@
     <audio id="dingding" src="snd/dingding.mp3"></audio>
     <audio id="dingdingding" src="snd/dingdingding.mp3"></audio>
     <audio id="ticktock" src="snd/ticktock.mp3"></audio>
-    <script>
-        if (!navigator.serviceWorker.controller) {
-            navigator.serviceWorker.register("./sw.js").then((reg) => {
-                console.log("Service worker has been registered for scope: " + reg.scope);
-            });
-        }
-    </script>
 </body>
 </html>
