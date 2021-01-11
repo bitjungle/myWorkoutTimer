@@ -2,13 +2,14 @@
 //
 
 self.addEventListener("install", (event) => {
+  console.debug("Installing web app");
   event.waitUntil(preLoad());
 });
 
 const preLoad = () => {
-  console.log("Installing web app");
+  console.debug("Preloading web app");
   return caches.open("offline").then((cache) => {
-    console.log("caching index and important routes");
+    console.debug("Caching...");
     return cache.addAll(["./css/", 
                          "./img/", 
                          "./js/", 
@@ -17,12 +18,14 @@ const preLoad = () => {
                          "./offline.html",
                          "./workout.html", 
                          "./about.html",
+                         "./favicon.ico",
                          "./manifest.json"
     ]);
   });
 };
 
 self.addEventListener("fetch", (event) => {
+  console.debug(`Intercepting fetch request for ${event.request.url}`);
   event.respondWith(checkResponse(event.request).catch(() => {
     return returnFromCache(event.request);
   }));
@@ -44,7 +47,7 @@ const checkResponse = (request) => {
 const addToCache = (request) => {
   return caches.open("offline").then((cache) => {
     return fetch(request).then((response) => {
-      console.log(response.url + " was cached");
+      console.debug(response.url + " was cached");
       return cache.put(request, response);
     });
   });
